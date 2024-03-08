@@ -18,9 +18,9 @@ typeWriter(); // typeWriter 함수 실행
 document.addEventListener('DOMContentLoaded', function () {
   // html 파일 내 요소들이 모두 로드되었을 때 실행
   // luxy init
-  // luxy.init({
-  //   wrapperSpeed: 0.9,
-  // });
+  luxy.init({
+    wrapperSpeed: 0.9,
+  });
 
   // ========= GSAP EFFECT =========
   gsap.registerPlugin(ScrollTrigger); // gsap scrollTrigger 플러그인 등록
@@ -126,10 +126,22 @@ document.addEventListener('DOMContentLoaded', function () {
       scrollTrigger: commonScrollTrigger.about,
       yPercent: 50,
     })
-
   }
 
   aboutAnimation();
+
+  function benefitsAnimation(){
+    const benefits_nums = gsap.utils.toArray('.benefits_num');
+    console.log(benefits_nums);
+
+
+  benefits_nums.forEach((num) => {
+    const data_speed = num.getAttribute('data-speed');
+    console.log(data_speed);
+  });
+}
+  
+  benefitsAnimation();
 
   const wWidth = window.outerWidth;
 
