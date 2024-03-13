@@ -46,28 +46,34 @@ document.addEventListener('DOMContentLoaded', function () {
       scrub: 1.8, // 스크롤 동기화 여부, true일 경우 스크롤 타이밍에 맞춰 애니메이션 실행, 시간 적용 시 지정된 시간 만큼 지연 후 애니메이션 실행
       // markers: true, // 디버깅을 위한 마커 표시
     },
+
     about: {
-      trigger: '.about', 
-      start: 'top bottom', 
-      scrub: 1.8, 
+      trigger: '.about',
+      start: 'top bottom',
+      scrub: 1.8,
+    },
+
+    benefits: {
+      trigger: '.benefits_lists',
+      start: 'top bottom',
+      scrub: 1.8,
     },
   };
 
   // square rotate animation
   // const titleSquare = document.querySelector('.title-square');
-  const titleSquares = gsap.utils.toArray('.title-square')
+  const titleSquares = gsap.utils.toArray('.title-square');
 
   titleSquares.forEach((square) => {
     tl.from(square, {
       scrollTrigger: {
-        trigger: square, 
+        trigger: square,
         start: 'top bottom',
         scrub: 1.8,
       },
       rotate: 760,
     });
   });
-
 
   function headerAnimation(xValue) {
     // 이미지 애니메이션
@@ -112,35 +118,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  function aboutAnimation(){
+  function aboutAnimation() {
     tl.from('.about-img', {
       scrollTrigger: commonScrollTrigger.about,
       yPercent: 80,
-    })
+    });
 
     tl.from('.about-img img', {
       scrollTrigger: commonScrollTrigger.about,
       scale: 1.6,
-    })
+    });
     tl.to('.about-text', {
       scrollTrigger: commonScrollTrigger.about,
       yPercent: 50,
-    })
+    });
   }
 
   aboutAnimation();
 
-  function benefitsAnimation(){
+  function benefitsAnimation() {
     const benefits_nums = gsap.utils.toArray('.benefits_num');
     console.log(benefits_nums);
 
+    benefits_nums.forEach((num) => {
+      const data_speed = num.getAttribute('data-speed');
+      tl.from(num, {
+        scrollTrigger: commonScrollTrigger.benefits,
+        x: -data_speed,
+      });
+    });
+  }
 
-  benefits_nums.forEach((num) => {
-    const data_speed = num.getAttribute('data-speed');
-    console.log(data_speed);
-  });
-}
-  
   benefitsAnimation();
 
   const wWidth = window.outerWidth;
