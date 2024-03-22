@@ -156,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function benefitsAnimation() {
     const benefits_nums = gsap.utils.toArray('.benefits_num');
-    console.log(benefits_nums);
 
     benefits_nums.forEach((num) => {
       const data_speed = num.getAttribute('data-speed');
@@ -171,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function workAnimation() {
     const work_elmts = gsap.utils.toArray('.work-item, .work-item-num');
-    console.log(work_elmts);
 
     work_elmts.forEach((num) => {
       const data_speed = num.getAttribute('data-speed');
@@ -190,11 +188,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   workAnimation();
 
-  function serviceAnimation() {
-    const service_elmts = gsap.utils.toArray('.service-arrow');
-    console.log(service_elmts);
+  const pcDataSpeed = ['500', '400', '800', '600'];
+  const mobileDataSpeed = ['150', '180', '250', '180'];
 
-    service_elmts.forEach((num) => {
+  function serviceAnimation(speed) {
+    const arrow_elmts = gsap.utils.toArray('.service-arrow');
+
+    arrow_elmts.forEach((num, i) => {
+      console.log(speed[i]);
       const data_speed = num.getAttribute('data-speed');
 
       tl.from(num, {
@@ -204,19 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  serviceAnimation();
-
-  const wWidth = window.outerWidth;
-
-  if (wWidth > 1300) {
-    headerAnimation(-70);
-  } else {
-    headerAnimation(0);
-  }
-
   function footerAnimation() {
     const letter_elmts = gsap.utils.toArray('.footer-wrapper span');
-    console.log(letter_elmts);
 
     letter_elmts.forEach((num) => {
       const data_speed = num.getAttribute('data-speed');
@@ -227,8 +217,18 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
   footerAnimation();
 
+  const wWidth = window.outerWidth;
+
+  if (wWidth > 1300) {
+    headerAnimation(-70);
+    serviceAnimation(pcDataSpeed);
+  } else {
+    headerAnimation(0);
+    serviceAnimation(mobileDataSpeed);
+  }
   //================================
 });
 
